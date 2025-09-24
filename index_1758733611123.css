@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Trading Dark Theme */
+    --background: 220 13% 9%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 13% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 13% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 220 13% 9%;
+
+    --secondary: 217 19% 27%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+
+    --accent: 142 76% 36%;
+    --accent-foreground: 220 13% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 142 76% 36%;
+
+    /* Trading specific colors */
+    --bull: 142 76% 36%;
+    --bear: 0 84% 60%;
+    --neutral: 217.9 10.6% 64.9%;
+    
+    /* Chart colors */
+    --chart-bg: 220 13% 8%;
+    --chart-grid: 217 19% 27%;
+    --ema-10: 197 71% 52%;
+    --ema-55: 39 84% 56%;
+    --ema-100: 342 75% 59%;
+    --ema-200: 262 83% 58%;
+    
+    /* Gradients */
+    --gradient-bull: linear-gradient(135deg, hsl(var(--bull)), hsl(142 76% 45%));
+    --gradient-bear: linear-gradient(135deg, hsl(var(--bear)), hsl(0 84% 70%));
+    --gradient-card: linear-gradient(135deg, hsl(var(--card)), hsl(220 13% 13%));
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Enhance dark mode */
+    --chart-bg: 220 13% 6%;
+    --gradient-card: linear-gradient(135deg, hsl(var(--card)), hsl(220 13% 8%));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Trading specific styles */
+  .bull-signal {
+    @apply text-bull animate-pulse;
+  }
+  
+  .bear-signal {
+    @apply text-bear animate-pulse;
+  }
+  
+  .price-up {
+    @apply text-bull;
+    animation: priceFlash 0.5s ease-in-out;
+  }
+  
+  .price-down {
+    @apply text-bear;
+    animation: priceFlash 0.5s ease-in-out;
+  }
+  
+  .chart-container {
+    @apply bg-gradient-to-br from-card to-card/50 backdrop-blur-sm;
+  }
+  
+  .signal-triangle {
+    animation: signalPulse 2s infinite;
+  }
+  
+  @keyframes priceFlash {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  
+  @keyframes signalPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+  }
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/20;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted/80;
+  }
+}
