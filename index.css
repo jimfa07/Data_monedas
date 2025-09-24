@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Trading Dark Theme Color Definitions */
+@layer base {
+  :root {
+    /* Trading Dark Theme */
+    --background: hsl(220, 13%, 9%);
+    --foreground: hsl(210, 40%, 98%);
+
+    --card: hsl(220, 13%, 11%);
+    --card-foreground: hsl(210, 40%, 98%);
+
+    --popover: hsl(220, 13%, 11%);
+    --popover-foreground: hsl(210, 40%, 98%);
+
+    --primary: hsl(142, 76%, 36%);
+    --primary-foreground: hsl(220, 13%, 9%);
+
+    --secondary: hsl(217, 19%, 27%);
+    --secondary-foreground: hsl(210, 40%, 98%);
+
+    --muted: hsl(215, 27.9%, 16.9%);
+    --muted-foreground: hsl(217.9, 10.6%, 64.9%);
+
+    --accent: hsl(142, 76%, 36%);
+    --accent-foreground: hsl(220, 13%, 9%);
+
+    --destructive: hsl(0, 84.2%, 60.2%);
+    --destructive-foreground: hsl(210, 40%, 98%);
+
+    --border: hsl(215, 27.9%, 16.9%);
+    --input: hsl(215, 27.9%, 16.9%);
+    --ring: hsl(142, 76%, 36%);
+
+    /* Trading specific colors */
+    --bull: hsl(142, 76%, 36%);
+    --bear: hsl(0, 84%, 60%);
+    --neutral: hsl(217.9, 10.6%, 64.9%);
+    
+    /* Chart colors */
+    --chart-bg: hsl(220, 13%, 8%);
+    --chart-grid: hsl(217, 19%, 27%);
+    --ema-10: hsl(197, 71%, 52%);
+    --ema-55: hsl(39, 84%, 56%);
+    --ema-100: hsl(342, 75%, 59%);
+    --ema-200: hsl(262, 83%, 58%);
+
+    --radius: 0.75rem;
+
+    /* Default shadcn sidebar variables */
+    --sidebar-background: hsl(0, 0%, 98%);
+    --sidebar-foreground: hsl(240, 5.3%, 26.1%);
+    --sidebar-primary: hsl(240, 5.9%, 10%);
+    --sidebar-primary-foreground: hsl(0, 0%, 98%);
+    --sidebar-accent: hsl(240, 4.8%, 95.9%);
+    --sidebar-accent-foreground: hsl(240, 5.9%, 10%);
+    --sidebar-border: hsl(220, 13%, 91%);
+    --sidebar-ring: hsl(217.2, 91.2%, 59.8%);
+  }
+
+  .dark {
+    /* Enhanced dark mode for trading */
+    --chart-bg: hsl(220, 13%, 6%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Trading specific styles */
+  .gradient-card {
+    background: linear-gradient(135deg, hsl(var(--card)), hsl(220, 13%, 13%));
+  }
+
+  .chart-container {
+    background: linear-gradient(135deg, hsl(var(--card)), hsl(220, 13%, 8%));
+  }
+
+  .bull-signal {
+    @apply text-bull animate-pulse;
+  }
+  
+  .bear-signal {
+    @apply text-bear animate-pulse;
+  }
+  
+  .price-up {
+    @apply text-bull;
+    animation: priceFlash 0.5s ease-in-out;
+  }
+  
+  .price-down {
+    @apply text-bear;
+    animation: priceFlash 0.5s ease-in-out;
+  }
+  
+  .signal-pulse {
+    animation: signalPulse 2s infinite;
+  }
+  
+  @keyframes priceFlash {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; transform: scale(1.02); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  
+  @keyframes signalPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+  }
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/20;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted/80;
+  }
+
+  /* Custom chart animations */
+  .chart-bar {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .chart-bar:hover {
+    opacity: 0.8;
+    transform: scaleY(1.02);
+  }
+
+  /* Signal notification animations */
+  .signal-notification {
+    animation: slideInRight 0.3s ease-out;
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Loading states */
+  .loading-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@layer components {
+  /* Custom button variants for trading */
+  .btn-bull {
+    @apply bg-bull text-black hover:bg-bull/90 font-semibold;
+  }
+  
+  .btn-bear {
+    @apply bg-bear text-white hover:bg-bear/90 font-semibold;
+  }
+  
+  .btn-neutral {
+    @apply bg-muted text-muted-foreground hover:bg-muted/80;
+  }
+
+  /* Card variants */
+  .card-bull {
+    @apply border-bull/30 bg-bull/5 hover:bg-bull/10;
+  }
+  
+  .card-bear {
+    @apply border-bear/30 bg-bear/5 hover:bg-bear/10;
+  }
+
+  /* Status indicators */
+  .status-active {
+    @apply bg-bull/20 text-bull;
+  }
+  
+  .status-inactive {
+    @apply bg-muted/20 text-muted-foreground;
+  }
+}
